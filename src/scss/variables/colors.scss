@@ -5,6 +5,10 @@ $terinary: #3DDC97;
 $white: #FCFCFC;
 $black: #000000;
 
+$google-border: #dfe1e5;
+$transparent: transparent;
+$none: none;
+
 // Add it for special cases if we need to overwrite default bottstrap some css properties
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
