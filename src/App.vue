@@ -28,6 +28,7 @@ html {
 }
 body {
   min-height: 100%;
+  overflow-x: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

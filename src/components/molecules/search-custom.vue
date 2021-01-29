@@ -88,7 +88,6 @@ export default {
 
   &-last {
     &--result {
-      width: 50%;
       @include  alignCenterSafeMethod();
     }
   }
