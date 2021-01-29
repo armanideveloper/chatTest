@@ -7,16 +7,25 @@
             Mixer
           </h3>
           <input-search class="list-wrapper-first--search-input mb-2" />
-          <custom-button buttonText="Search" />
+          <custom-button @callButton="fetchData()" buttonText="Search" />
         </b-col>
       </b-col>
       <b-col cols="12" class="mt-4 list-wrapper-last">
         <div class="list-wrapper-last--result">
-          <h5 class="mb-2">
-            Search result
-          </h5>
-          <result-block />
-          <hr>
+          <div v-if="currentArray !== null">
+            <h5 class="mb-2">
+              Search result
+            </h5>
+            <div v-for="(item, index) in currentArray" v-bind:key="index">
+              <result-block :blockResult="item" />
+              <hr>
+            </div>
+          </div>
+          <div v-else>
+            <h5>
+              Please press find button
+            </h5>
+          </div>
         </div>
       </b-col>
     </b-row>
@@ -37,9 +46,31 @@ export default {
   },
   data: function () {
     return {
-      fakeJsonArray: []
+      fakeJsonArray: [
+        {
+          link: 'https://www.parisaeroport.fr/',
+          description: 'Airport of France',
+          date: '12/07/2002'
+        },
+        {
+          link: 'https://www.skidive.ae',
+          description: 'Dubai skidive club',
+          date: '12/12/2012'
+        },
+        {
+          link: 'www.aero.it',
+          description: 'Italy Avia company',
+          date: '12/12/2020'
+        }
+      ],
+      currentArray: null
     }
   },
+  methods: {
+    fetchData() {
+      this.currentArray = this.fakeJsonArray
+    }
+  }
 };
 </script>
 

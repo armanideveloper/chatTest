@@ -1,5 +1,5 @@
 <template>
-  <b-button class="btn-sm" :variant="buttonVariant">
+  <b-button @click="emitData" class="btn-sm" :variant="buttonVariant">
     {{ buttonText }}
   </b-button>
 </template>
@@ -15,6 +15,11 @@ export default {
     buttonVariant: {
       type: String,
       default: "outline-primary"
+    }
+  },
+  methods: {
+    emitData() {
+      this.$emit('callButton')
     }
   }
 }
