@@ -1,5 +1,11 @@
 <template>
-  <b-form-input :class="inputClassArray" :placeholder="inputPlaceholder" :autocomplete="cutomAutoComplete" :readonly="customReadonly" :autofocus="customAutofocus" />
+  <b-form-input
+    :class="inputClassArray"
+    :placeholder="inputPlaceholder"
+    :autocomplete="cutomAutoComplete"
+    :readonly="customReadonly"
+    :autofocus="customAutofocus"
+  />
 </template>
 
 <script>
@@ -18,7 +24,7 @@ export default {
     },
     cutomAutoComplete: {
       type: String,
-      default: 'off'
+      default: "off"
     },
     customReadonly: {
       type: Boolean,
@@ -36,10 +42,10 @@ export default {
 .primary-input {
   @include inputStyle($google-border, 34px);
   @include setBackgroundRgba($transparent, 0);
-   &:focus {
-     box-shadow: $none;
-     @include setBackgroundRgba($transparent, 0);
-     @include inputStyle($google-border, 34px);
-   }
+  &:focus {
+    box-shadow: $none;
+    @include setBackgroundRgba($transparent, 0);
+    @include inputStyle($google-border, 34px);
+  }
 }
 </style>
