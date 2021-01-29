@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <b-container>
+      <b-row>
+        <custom-input />
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import customInput from "./components/atoms/input";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    customInput
   }
 };
 </script>
@@ -24,5 +27,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.we {
+  background: #fff;
+  display: flex;
+  border: 1px solid #dfe1e5;
+  box-shadow: none;
+  border-radius: 24px;
+  z-index: 3;
+  height: 44px;
+  margin: 0 auto;
 }
 </style>
