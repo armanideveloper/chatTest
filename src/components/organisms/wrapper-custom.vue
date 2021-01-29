@@ -10,7 +10,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <search-wrapper />
+          <search-wrapper class="mt-5" />
         </b-col>
       </b-row>
     </b-container>

@@ -1,5 +1,6 @@
 <template>
   <b-form-input
+    class="primary-input"
     :class="inputClassArray"
     :placeholder="inputPlaceholder"
     :autocomplete="cutomAutoComplete"
@@ -17,10 +18,7 @@ export default {
       default: null
     },
     inputClassArray: {
-      type: Array,
-      default: () => {
-        return ["primary-input"];
-      }
+      type: Array
     },
     cutomAutoComplete: {
       type: String,
@@ -38,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .primary-input {
   @include inputStyle($google-border, 34px);
   @include setBackgroundRgba($transparent, 0);
