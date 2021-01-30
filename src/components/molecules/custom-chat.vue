@@ -45,33 +45,33 @@
           <div class="bot-wrapper">
             <div>
               <div class="bot-wrapper-text ml-2">
-                <span v-html="$options.filters.findMarkByRegexp(item.answer)"></span>
+                <span
+                  v-html="$options.filters.findMarkByRegexp(item.answer)"
+                ></span>
               </div>
-              <div
-                  class="emojidiv"
+              <div class="emojidiv">
+                <p
+                  class="emojidiv-element"
+                  @click="processAction('correctInfo', index)"
+                  v-b-tooltip.hover.bottom="'Correct'"
                 >
-                  <p
-                    class="emojidiv-element"
-                    @click="processAction('correctInfo', index)"
-                    v-b-tooltip.hover.bottom="'Correct'"
-                  >
-                    &#128077;
-                  </p>
-                  <p
-                    class="emojidiv-element"
-                    @click="processAction('notCorrectInfo', index)"
-                    v-b-tooltip.hover.bottom="'Not correct'"
-                  >
-                    &#128078;
-                  </p>
-                  <p
-                    class="emojidiv-element"
-                    @click="processAction('correctBySelf', index)"
-                    v-b-tooltip.hover.bottom="'Improve myself'"
-                  >
-                    &#9997;
-                  </p>
-                </div>
+                  &#128077;
+                </p>
+                <p
+                  class="emojidiv-element"
+                  @click="processAction('notCorrectInfo', index)"
+                  v-b-tooltip.hover.bottom="'Not correct'"
+                >
+                  &#128078;
+                </p>
+                <p
+                  class="emojidiv-element"
+                  @click="processAction('correctBySelf', index)"
+                  v-b-tooltip.hover.bottom="'Improve myself'"
+                >
+                  &#9997;
+                </p>
+              </div>
             </div>
             <div class="bot-wrapper-profileImage ml-2">
               <b-img v-bind="avatar" blank-color="#88f" :rounded="true" />
@@ -106,10 +106,10 @@ export default {
     ...mapState(["chatVisibility", "userConversationArray"])
   },
   filters: {
-    findMarkByRegexp: function (value) {
-      let styleMatchRegExp = /<mark[^>]*>([^<]+)<\/mark>/ig;
+    findMarkByRegexp: function(value) {
+      let styleMatchRegExp = /<mark[^>]*>([^<]+)<\/mark>/gi;
       let match = styleMatchRegExp.exec(value);
-      return match[0]
+      return match[0];
     }
   },
   methods: {

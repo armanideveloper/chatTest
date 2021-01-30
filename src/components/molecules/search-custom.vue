@@ -33,28 +33,25 @@
               help your problem
             </small>
             <div>
-              <p @mouseup="getSelectedText()" v-html="searchBlockNewValue.value">
-              </p>
+              <p
+                @mouseup="getSelectedText()"
+                v-html="searchBlockNewValue.value"
+              ></p>
               <transition name="fade">
-                <div
-                    class="emojidiv"
-                    v-if="showDrop"
-                >
+                <div class="emojidiv" v-if="showDrop">
                   <p
-                      class="emojidiv-element"
-                      @click="processAction('good')"
-                      v-b-tooltip.hover.bottom="'Teach this answer'"
+                    class="emojidiv-element"
+                    @click="processAction('good')"
+                    v-b-tooltip.hover.bottom="'Teach this answer'"
                   >
-                    Good
-                    &#128077;
+                    Good &#128077;
                   </p>
                   <p
-                      class="emojidiv-element"
-                      @click="processAction('bad')"
-                      v-b-tooltip.hover.bottom="'Approximate answer'"
+                    class="emojidiv-element"
+                    @click="processAction('bad')"
+                    v-b-tooltip.hover.bottom="'Approximate answer'"
                   >
-                    Bad
-                    &#128078;
+                    Bad &#128078;
                   </p>
                 </div>
               </transition>
@@ -115,14 +112,14 @@ export default {
       this.currentArray = this.fakeJsonArray;
     },
     processAction(str) {
-      if(str == 'good') {
+      if (str == "good") {
         this.$bvToast.toast(`Soon I will help again`, {
           title: `Cool I have remember your correct answer`,
           variant: "success",
           solid: true,
           toaster: "b-toaster-bottom-right"
         });
-      } else if(str == 'bad') {
+      } else if (str == "bad") {
         this.$bvToast.toast(`I am self taught bot`, {
           title: `OK, the next time I will improve myself`,
           variant: "danger",
@@ -133,8 +130,8 @@ export default {
     },
     getSelectedText() {
       let currentText = document.getSelection().toString();
-      console.log(currentText)
-      this.showDrop = !this.showDrop
+      console.log(currentText);
+      this.showDrop = !this.showDrop;
     }
   }
 };
@@ -164,15 +161,14 @@ export default {
   flex-direction: row;
   max-width: 10%;
   justify-content: space-between;
-  @include alignCenterSafeMethod()
-
-  &-element {
+  @include alignCenterSafeMethod() &-element {
     cursor: pointer;
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
