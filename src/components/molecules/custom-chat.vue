@@ -56,18 +56,21 @@
                   <p
                     class="emojidiv-element"
                     @click="processAction('correctInfo', index)"
+                    v-b-tooltip.hover.bottom="'Correct'"
                   >
                     &#128077;
                   </p>
                   <p
                     class="emojidiv-element"
                     @click="processAction('notCorrectInfo', index)"
+                    v-b-tooltip.hover.bottom="'Not correct'"
                   >
                     &#128078;
                   </p>
                   <p
                     class="emojidiv-element"
                     @click="processAction('correctBySelf', index)"
+                    v-b-tooltip.hover.bottom="'Improve myself'"
                   >
                     &#9997;
                   </p>

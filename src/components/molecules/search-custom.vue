@@ -43,6 +43,7 @@
                   <p
                       class="emojidiv-element"
                       @click="processAction('good')"
+                      v-b-tooltip.hover.bottom="'Teach this answer'"
                   >
                     Good
                     &#128077;
@@ -50,6 +51,7 @@
                   <p
                       class="emojidiv-element"
                       @click="processAction('bad')"
+                      v-b-tooltip.hover.bottom="'Approximate answer'"
                   >
                     Bad
                     &#128078;
