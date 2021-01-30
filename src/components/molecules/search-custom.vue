@@ -35,6 +35,7 @@
             <div>
               <p
                 @mouseup="getSelectedText()"
+                class="text-left"
                 v-html="searchBlockNewValue.value"
               ></p>
               <transition name="fade">

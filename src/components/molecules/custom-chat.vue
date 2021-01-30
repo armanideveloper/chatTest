@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <div class="bot mb-4">
+        <div class="bot">
           <div class="bot-wrapper">
             <div>
               <div class="bot-wrapper-text ml-2">
@@ -190,6 +190,10 @@ export default {
 
     .card {
       background-color: $transparent;
+
+      &-body {
+        padding-left: 6px;
+      }
     }
 
     &-chat-wrapper {
@@ -225,6 +229,7 @@ export default {
 
             &-element {
               margin-left: 0.3em;
+              margin-bottom: 0 !important;
               cursor: pointer !important;
             }
           }

@@ -74,6 +74,7 @@ export default new Vuex.Store({
         answer: state.randomText[state.count]
       });
       state.chatVisibility = payload.startChat;
+      state.searchBlockNewValue.showNewValue = false;
     },
     mutateSearchResult(state, payload) {
       state.currentIndex = payload.index;
