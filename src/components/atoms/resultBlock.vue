@@ -21,23 +21,23 @@ export default {
     blockResult: {
       type: Object,
       default: () => ({
-        link: 'www.www.www',
-        description: 'description',
-        date: '12/12/12'
+        link: "www.www.www",
+        description: "description",
+        date: "12/12/12"
       })
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .search-wrapper {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 
-    &-link {
-      cursor: pointer;
-    }
+  &-link {
+    cursor: pointer;
   }
+}
 </style>

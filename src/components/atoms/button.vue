@@ -10,7 +10,7 @@ export default {
   props: {
     buttonText: {
       type: String,
-      default: 'Default Button'
+      default: "Default Button"
     },
     buttonVariant: {
       type: String,
@@ -19,12 +19,10 @@ export default {
   },
   methods: {
     emitData() {
-      this.$emit('callButton')
+      this.$emit("callButton");
     }
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

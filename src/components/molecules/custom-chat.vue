@@ -1,89 +1,172 @@
 <template>
-    <b-sidebar header-class="custom-collapse-header" body-class="custom-collapse-body" class="custom-collapse" id="collapseExample" right no-header-close>
-
-      <form
-          @submit="checkForm"
+  <b-sidebar
+    header-class="custom-collapse-header"
+    body-class="custom-collapse-body"
+    class="custom-collapse"
+    id="collapseExample"
+    right
+    no-header-close
+  >
+    <form @submit="checkForm">
+      <custom-input
+        ref="inputQuestion"
+        :inputClassArray="['custom-collapse-body-question', 'mt-3']"
+        inputPlaceholder="How can I help You"
+      />
+    </form>
+    <b-card
+      v-if="chatVisibility"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mt-5"
+    >
+      <div
+        class="custom-collapse-body-chat-wrapper"
+        v-for="(item, index) in userConversationArray"
+        :key="index"
       >
-        <custom-input ref="inputQuestion"  :inputClassArray="['custom-collapse-body-question', 'mt-3']" inputPlaceholder="How can I help You" />
-      </form>
-
-      <b-card
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem;"
-          class="mt-5"
-      >
-        <div class="custom-collapse-body-chat-wrapper">
-          <div class="user mb-4">
-            <div class="user-wrapper">
-              <div class="user-wrapper-profileImage">
-                <b-img v-bind="avatar" blank-color="rgba(128, 255, 255)" :rounded="true" />
-              </div>
-              <div class="user-wrapper-text ml-2">
-                My questionn is
-              </div>
+        <div class="user mb-4">
+          <div class="user-wrapper">
+            <div class="user-wrapper-profileImage">
+              <b-img
+                v-bind="avatar"
+                blank-color="rgba(128, 255, 255)"
+                :rounded="true"
+              />
             </div>
-          </div>
-          <div class="bot mb-4">
-            <div class="bot-wrapper">
-              <div class="bot-wrapper-profileImage">
-                <b-img v-bind="avatar" blank-color="#88f" :rounded="true" />
-              </div>
-              <div>
-                <div class="bot-wrapper-text ml-2" @click="openEmoji">
-                  My answer is
-                </div>
-                <transition name="fade">
-                  <div class="emojidiv" v-if="showEmojiDiv">
-                    <p class="emojidiv-element">
-                      &#128077;
-                    </p>
-                    <p lass="emojidiv-element">
-                      &#128078;
-                    </p>
-                    <p lass="emojidiv-element">
-                      &#9997;
-                    </p>
-                  </div>
-                </transition>
-              </div>
+            <div class="user-wrapper-text ml-2">
+              {{ item.question }}
             </div>
           </div>
         </div>
-      </b-card>
-    </b-sidebar>
+        <div class="bot mb-4">
+          <div class="bot-wrapper">
+            <div class="bot-wrapper-profileImage">
+              <b-img v-bind="avatar" blank-color="#88f" :rounded="true" />
+            </div>
+            <div>
+              <div class="bot-wrapper-text ml-2">
+                <span v-html="$options.filters.findMarkByRegexp(item.answer)"></span>
+              </div>
+              <div
+                  class="emojidiv"
+                >
+                  <p
+                    class="emojidiv-element"
+                    @click="processAction('correctInfo', index)"
+                  >
+                    &#128077;
+                  </p>
+                  <p
+                    class="emojidiv-element"
+                    @click="processAction('notCorrectInfo', index)"
+                  >
+                    &#128078;
+                  </p>
+                  <p
+                    class="emojidiv-element"
+                    @click="processAction('correctBySelf', index)"
+                  >
+                    &#9997;
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </b-card>
+  </b-sidebar>
 </template>
 
 <script>
-import customInput from '../atoms/input'
+import customInput from "../atoms/input";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "custom-chat",
   components: {
     customInput
   },
-  data: function () {
+  data: function() {
     return {
       avatar: {
         blank: true,
         width: 16,
         height: 16
       },
-      showEmojiDiv: false
+      selectedDialogIndex: null
+    };
+  },
+  computed: {
+    ...mapState(["chatVisibility", "userConversationArray"])
+  },
+  filters: {
+    findMarkByRegexp: function (value) {
+      let styleMatchRegExp = /<mark[^>]*>([^<]+)<\/mark>/ig;
+      let match = styleMatchRegExp.exec(value);
+      return match[0]
     }
   },
   methods: {
-    openEmoji() {
-      this.showEmojiDiv = !this.showEmojiDiv
-    },
+    ...mapActions({
+      askQuestion: "startChat",
+      improveQuestion: "passCurrentChatData"
+    }),
 
     checkForm(e) {
       e.preventDefault();
-      console.log('dsd')
+      let question = this.$refs.inputQuestion.$el.value;
+      if (question !== " " || question !== "undefined" || question !== null) {
+        let startChat = true;
+        let payloadObject = {
+          question: question,
+          startChat: startChat
+        };
+        this.askQuestion(payloadObject);
+      }
+    },
+
+    processAction(actionType, index) {
+      this.selectedDialogIndex = index;
+      if (actionType == "correctInfo") {
+        this.$bvToast.toast(`It's just beginning of AI century`, {
+          title: `Cool`,
+          variant: "success",
+          autoHideDelay: 1000,
+          solid: true,
+          toaster: "b-toaster-bottom-right"
+        });
+      } else if (actionType == "notCorrectInfo") {
+        this.$bvToast.toast(
+          `The next time I will do all my best to be usefull for you`,
+          {
+            title: `OOPS`,
+            variant: "danger",
+            autoHideDelay: 1000,
+            solid: true,
+            toaster: "b-toaster-bottom-right"
+          }
+        );
+      } else if (actionType == "correctBySelf") {
+        this.$bvToast.toast(
+          `Please select text part which you need, that will be best for your problem solving`,
+          {
+            title: `Am i Wrong ?`,
+            variant: "info",
+            solid: true
+          }
+        );
+        let newObject = {
+          index: this.selectedDialogIndex,
+          show: true
+        };
+        this.improveQuestion(newObject);
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -130,18 +213,12 @@ export default {
 
             &-element {
               margin-left: 0.3em;
+              cursor: pointer !important;
             }
           }
         }
       }
     }
-  }
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
   }
 
   .b-sidebar {
