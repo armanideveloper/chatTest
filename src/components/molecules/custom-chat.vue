@@ -43,9 +43,6 @@
         </div>
         <div class="bot mb-4">
           <div class="bot-wrapper">
-            <div class="bot-wrapper-profileImage">
-              <b-img v-bind="avatar" blank-color="#88f" :rounded="true" />
-            </div>
             <div>
               <div class="bot-wrapper-text ml-2">
                 <span v-html="$options.filters.findMarkByRegexp(item.answer)"></span>
@@ -75,6 +72,9 @@
                     &#9997;
                   </p>
                 </div>
+            </div>
+            <div class="bot-wrapper-profileImage ml-2">
+              <b-img v-bind="avatar" blank-color="#88f" :rounded="true" />
             </div>
           </div>
         </div>
@@ -188,9 +188,17 @@ export default {
       @include setBackgroundRgba($transparent, 0);
     }
 
+    .card {
+      background-color: $transparent;
+    }
+
     &-chat-wrapper {
       display: flex;
       flex-direction: column;
+      background-color: $white;
+      margin-top: 10px;
+      padding: 16px;
+      border-radius: 16px;
 
       .user {
         &-wrapper {
@@ -213,6 +221,7 @@ export default {
           .emojidiv {
             display: flex;
             flex-direction: row;
+            justify-content: flex-end;
 
             &-element {
               margin-left: 0.3em;
